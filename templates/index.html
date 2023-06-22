@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Journal</title>
+    <style>
+        body {
+            background-color: #dddddd;
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 15px;
+        }
+
+        .container {
+            margin: 20px auto;
+            max-width: 500px;
+            padding: 20px;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 5px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form label {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        form input[type="date"],
+        form input[type="text"],
+        form input[type="submit"],
+        form textarea {
+            margin-bottom: 10px;
+            padding: 5px;
+            width: 300px;
+            box-sizing: border-box;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Add Entry button styles */
+        input[type="submit"] {
+            background-color: #F55E7C;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            width: 50%;
+            height: 30px;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 14px;
+        }
+
+        /* Custom styles for entry textarea */
+        textarea {
+            resize: vertical; /* Allow vertical resizing */
+            max-width: 100%; /* Ensure it stays within the container */
+            width: 100%; /* Take up the full width */
+        }
+
+        /* Delete and View buttons styles */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+        }
+
+        .action-button {
+            margin-right: 5px;
+            background-color: #2CCB2E;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .delete-button {
+            background-color: #ff3a3a;
+        }
+    </style>
+</head>
+<body>
+    <h1>Journal</h1>
+    <div class="container">
+        <form action="/add_entry" method="post">
+            <label for="date">Date:</label>
+            <input type="date" name="date" id="date" required>
+            <label for="entry">Entry:</label>
+            <textarea name="entry" id="entry" rows="4" required></textarea>
+            <input type="submit" value="Add Entry">
+        </form>
+    </div>
+
+    <div class="container">
+        <h2>Journal Entries</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for date, entry in dates.items()|sort(reverse=True) %}
+                    <tr>
+                        <td>{{ date }}</td>
+                        <td class="action-buttons">
+                            <form action="/view_entry/{{ date }}" method="get">
+                                <button class="action-button" type="submit">View</button>
+                            </form>
+                            <form action="/delete_entry/{{ date }}" method="post">
+                                <button class="action-button delete-button" type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

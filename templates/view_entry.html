@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Entry</title>
+    <style>
+        body {
+            background-color: #dddddd;
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 15px;
+        }
+
+        .container {
+            margin: 20px auto;
+            max-width: 500px;
+            padding: 20px;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 5px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        /* Back button styles */
+        .back-button {
+            background-color: #2C6DCB;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Entry</h1>
+    <div class="container">
+      <form action="/" method="get">
+            <button class="back-button" type="submit">Back</button>
+        </form>
+        <p><strong>{{ date }}</strong></p>
+        <!-- <p><strong>Entry:</strong></p> -->
+        <p>{{ entry }}</p>
+    </div>
+</body>
+</html>
